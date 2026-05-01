@@ -4,7 +4,7 @@
   "shortDescription": "A workflow to help creating room shell for agent in HotelHub",
   "description": "A project to retrieve file inputed by user, extract necessary information and create room shell for agent in HotelHub. Help to pre-calculate room rate by taking account of various factors like seasonality, gala dinner, and special events. It is built with UiPath and integrated with Salesforce to update the status of the request.",
   "tags": ["Excel Automation", "Salesforce", "API Integration"],    
-    "image": "Projects/Hotelhub/project_image.svg",
+    "image": "Projects/Hotelhub/hh.png",
     "folder": "Hotelhub"
   },
 {
@@ -12,7 +12,7 @@
   "shortDescription": "An automation solution for streamlining travel booking processes.",
   "description": "A web-based automation project designed to simplify and expedite travel booking workflows. It integrates with Salesforce request to update booking details including passenger information and supplier details",
   "tags": ["Excel Automation", "Salesforce", "API Integration"],
-   "image": "Projects/Travelbox/project_image.svg",
+   "image": "Projects/Travelbox/travelbox.png",
     "folder": "Travelbox"
 }
 ]
