@@ -21,14 +21,7 @@
     "SAP",
     "Unattended"
   ],
-  "metrics": {
-    "timeSaved": "120 hrs/month",
-    "accuracy": "98%",
-    "volume": "3000 invoices/month"
-  },
-  "status": "Production",
-  "type": "Enterprise Automation",
    "image": "Projects/Proj1/project_image.svg",
-    "folder": "TestProj"
+    "folder": "Proj1"
 }
 ]

@@ -11,7 +11,7 @@
     <header>
       <p style="text-transform: uppercase; letter-spacing: 0.32em; color:#475569; font-size:0.82rem; margin-bottom:12px;">Portfolio</p>
       <h1>My project showcase</h1>
-      <p>These cards are generated from the folders inside <strong>Projects/</strong>. Click any project to open details in a modal.</p>
+      <p>These entries are rendered from the folders inside <strong>Projects/</strong>. Each project shows an image on the left and project details on the right.</p>
     </header>
 
     <section id="personal-info" class="personal-panel">
@@ -72,45 +72,11 @@
     </section>
   </div>
 
-  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal">
-      <img id="modal-image" src="" alt="Project screenshot" />
-      <div class="modal-body">
-        <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
-          <div>
-            <p style="margin:0;color:#64748b; text-transform:uppercase; letter-spacing:0.14em; font-size:0.82rem;">Project details</p>
-            <h2 id="modal-title"></h2>
-          </div>
-          <button id="modal-close" class="close-button" aria-label="Close project modal">Close</button>
-        </div>
-        <div class="project-meta">
-        <span id="modal-status" class="status-badge"></span>
-        <span id="modal-type" class="type-badge"></span>
-      </div>
-
-      <p id="modal-description"></p>
-
-      <div id="modal-metrics" class="metrics-grid"></div>
-
-      <div id="modal-tags" class="modal-footer"></div>
-
-        <p id="modal-description"></p>
-        <div id="modal-tags" class="modal-footer"></div>
-      </div>
-    </div>
-  </div>
-
   <script>
     const grid = document.getElementById('projects-grid');
     const emptyState = document.getElementById('empty-state');
     const loadError = document.getElementById('load-error');
     const projectsSection = document.getElementById('projects-section');
-    const modal = document.getElementById('modal');
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalTags = document.getElementById('modal-tags');
-    const modalClose = document.getElementById('modal-close');
 
     async function loadProjects() {
       try {
@@ -129,7 +95,6 @@
 
     function renderProjects(projects, errorMessage = '') {
       grid.innerHTML = '';
-      modal.classList.remove('open');
       loadError.hidden = true;
       loadError.textContent = '';
 
@@ -145,94 +110,33 @@
       emptyState.hidden = true;
 
       projects.forEach((project) => {
-        const card = document.createElement('button');
+        const card = document.createElement('article');
         card.className = 'card';
-        card.type = 'button';
-        card.addEventListener('click', () => openModal(project));
+
+        const tags = Array.isArray(project.tags)
+          ? project.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')
+          : '';
 
         card.innerHTML = `
-          <img src="${project.image}" alt="${project.name} screenshot" />
+          <div class="card-image">
+            <img src="${project.image}" alt="${project.name} screenshot" />
+          </div>
           <div class="card-content">
             <div>
+              <p class="card-label">Project</p>
               <h3 class="card-title">${project.name}</h3>
               <p class="card-description">${project.shortDescription}</p>
             </div>
-            <span class="card-link">View details</span>
+            <div class="card-details">
+              <p>${project.description || project.shortDescription}</p>
+              <div class="card-tags">${tags}</div>
+            </div>
           </div>
         `;
 
         grid.appendChild(card);
       });
     }
-
-function openModal(project) {
-  modalImage.src = project.image;
-  modalImage.alt = `${project.name} screenshot`;
-
-  modalTitle.textContent = project.name;
-
-  modalDescription.textContent =
-    project.description || project.shortDescription;
-
-  const modalStatus = document.getElementById('modal-status');
-  const modalType = document.getElementById('modal-type');
-  const modalMetrics = document.getElementById('modal-metrics');
-
-  modalStatus.textContent = project.status || 'Unknown';
-  modalStatus.className = `status-badge ${(
-    project.status || ''
-  ).toLowerCase()}`;
-
-  modalType.textContent = project.type || 'Automation';
-
-  modalTags.innerHTML = '';
-  modalMetrics.innerHTML = '';
-
-  // Render Metrics
-  if (project.metrics) {
-    Object.entries(project.metrics).forEach(([key, value]) => {
-      const metricCard = document.createElement('div');
-      metricCard.className = 'metric-card';
-
-      metricCard.innerHTML = `
-        <span class="metric-label">
-          ${formatMetricLabel(key)}
-        </span>
-        <strong class="metric-value">
-          ${value}
-        </strong>
-      `;
-
-      modalMetrics.appendChild(metricCard);
-    });
-  }
-
-  // Render Tags
-  if (project.tags && project.tags.length) {
-    project.tags.forEach((tag) => {
-      const chip = document.createElement('span');
-      chip.className = 'chip';
-      chip.textContent = tag;
-      modalTags.appendChild(chip);
-    });
-  }
-
-  modal.classList.add('open');
-}
-
-    function closeModal() {
-      modal.classList.remove('open');
-    }
-
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeModal();
-    });
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('open')) {
-        closeModal();
-      }
-    });
 
     function adjustRootFontSize() {
       const minSize = 14;
