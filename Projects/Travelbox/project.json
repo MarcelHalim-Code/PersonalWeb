@@ -1,0 +1,6 @@
+{
+  "name": "Travelbox Automation",
+  "shortDescription": "An automation solution for streamlining travel booking processes.",
+  "description": "A web-based automation project designed to simplify and expedite travel booking workflows. It integrates with Salesforce request to update booking details including passenger information and supplier details",
+  "tags": ["Excel Automation", "Salesforce", "API Integration"]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Placeholder icon">
+  <rect width="160" height="160" rx="28" fill="#102d52" />
+  <circle cx="80" cy="80" r="36" fill="#f7e3a0" opacity="0.85" />
+  <path d="M80 56v48M56 80h48" stroke="#061325" stroke-width="10" stroke-linecap="round" />
+</svg>

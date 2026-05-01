@@ -1,6 +1,0 @@
-{
-  "name": "Test Project",
-  "shortDescription": "A demo project with a clean card layout and modal details.",
-  "description": "This sample project shows how the portfolio page will display each folder inside Projects. It includes a modal, tags, and image preview.",
-  "tags": ["HTML", "CSS", "UX"]
-}

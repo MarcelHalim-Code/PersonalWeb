@@ -9,9 +9,8 @@
 <body>
   <div class="page">
     <header>
-      <p style="text-transform: uppercase; letter-spacing: 0.32em; color:#475569; font-size:0.82rem; margin-bottom:12px;">Portfolio</p>
-      <h1>My project showcase</h1>
-      <p>These entries are rendered from the folders inside <strong>Projects/</strong>. Each project shows an image on the left and project details on the right.</p>
+      <p style="text-transform: uppercase; letter-spacing: 0.32em; color: var(--muted); font-size:0.82rem; margin-bottom:12px;">Portfolio</p>
+      <h1>RPA Automation Portfolio</h1>
     </header>
 
     <section id="personal-info" class="personal-panel">
@@ -50,14 +49,7 @@
       <div class="personal-stack">
         <div class="stack-card">
           <h2>Tool stack</h2>
-          <ul>
-            <li>UiPath</li>
-            <li>Power Automate</li>
-            <li>REST API</li>
-            <li>Salesforce Automation</li>
-            <li>Databricks</li>
-            <li>Git</li>
-          </ul>
+          <div id="tool-stack-icons" class="tool-stack-icons" aria-label="Tool stack icons"></div>
         </div>
       </div>
     </section>
@@ -155,9 +147,46 @@
       observer.observe(projectsSection);
     }
 
+    const toolStack = [
+      'UiPath',
+      'powerautomate',
+      'sf',
+      'Databricks',
+      'Github',
+      'jira',
+      'microsoft'
+    ];
+
+    function createToolIcon(tool) {
+      const sanitized = tool.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const image = new Image();
+      image.src = `Icons/icon_${sanitized}.png`;
+      image.alt = tool;
+      image.className = 'tool-stack-image';
+      image.loading = 'lazy';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'tool-stack-icon';
+      wrapper.appendChild(image);
+
+      image.onerror = () => {
+        image.src = 'Icons/icon_placeholder.svg';
+      };
+
+      return wrapper;
+    }
+
+    function renderToolStack() {
+      const container = document.getElementById('tool-stack-icons');
+      if (!container) return;
+      container.innerHTML = '';
+      toolStack.forEach((tool) => container.appendChild(createToolIcon(tool)));
+    }
+
     window.addEventListener('resize', adjustRootFontSize);
     adjustRootFontSize();
     watchProjectsSection();
+    renderToolStack();
     loadProjects();
   </script>
 </body>

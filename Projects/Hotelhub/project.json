@@ -1,0 +1,6 @@
+{
+  "name": "Hotel Room Creation Automation",
+  "shortDescription": "A workflow to help creating room shell for agent in HotelHub",
+  "description": "A project to retrieve file inputed by user, extract necessary information and create room shell for agent in HotelHub. Help to pre-calculate room rate by taking account of various factors like seasonality, gala dinner, and special events. It is built with UiPath and integrated with Salesforce to update the status of the request.",
+  "tags": ["Excel Automation", "Salesforce", "API Integration"]
+}
