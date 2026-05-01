@@ -14,12 +14,53 @@
       <p>These cards are generated from the folders inside <strong>Projects/</strong>. Click any project to open details in a modal.</p>
     </header>
 
-    <div id="projects-grid" class="grid"></div>
-    <div id="empty-state" class="empty-state" hidden>
+    <section id="personal-info" class="personal-panel">
+      <div class="personal-copy">
+        <p class="eyebrow">Hello, I’m</p>
+        <h1 class="personal-name">Marc <span>Creative Frontend Developer</span></h1>
+        <p class="personal-intro">I build polished digital experiences with clean UI, thoughtful interactions, and responsive layouts that feel great on any screen.</p>
+
+        <div class="personal-details">
+          <div class="detail-item">
+            <span>Experience</span>
+            <strong>4+ years building web interfaces</strong>
+          </div>
+          <div class="detail-item">
+            <span>Focus</span>
+            <strong>Responsive design & performance</strong>
+          </div>
+          <div class="detail-item">
+            <span>Approach</span>
+            <strong>Modern branding, fast interactions</strong>
+          </div>
+        </div>
+
+        <a class="cta-button" href="#projects-section">View projects</a>
+      </div>
+
+      <div class="personal-stack">
+        <div class="stack-card">
+          <h2>Tool stack</h2>
+          <ul>
+            <li>HTML & CSS</li>
+            <li>JavaScript</li>
+            <li>React / Vue</li>
+            <li>Figma</li>
+            <li>Node.js</li>
+            <li>Git</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects-section" class="projects-section">
+      <div id="projects-grid" class="grid"></div>
+      <div id="empty-state" class="empty-state" hidden>
       <strong>No projects were found.</strong>
       <p>Create folders inside <code>Projects/</code>, add a file named <code>project_image</code>, then run the generator script to build the portfolio cards.</p>
       <p id="load-error" hidden style="margin-top:16px;color:#b91c1c;">The project list could not be loaded.</p>
     </div>
+    </section>
   </div>
 
   <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -43,6 +84,7 @@
     const grid = document.getElementById('projects-grid');
     const emptyState = document.getElementById('empty-state');
     const loadError = document.getElementById('load-error');
+    const projectsSection = document.getElementById('projects-section');
     const modal = document.getElementById('modal');
     const modalImage = document.getElementById('modal-image');
     const modalTitle = document.getElementById('modal-title');
@@ -136,6 +178,26 @@
       }
     });
 
+    function adjustRootFontSize() {
+      const minSize = 14;
+      const maxSize = 18;
+      const scale = Math.min(maxSize, Math.max(minSize, window.innerWidth / 24));
+      document.documentElement.style.fontSize = `${scale}px`;
+    }
+
+    function watchProjectsSection() {
+      if (!projectsSection) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          projectsSection.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.2 });
+      observer.observe(projectsSection);
+    }
+
+    window.addEventListener('resize', adjustRootFontSize);
+    adjustRootFontSize();
+    watchProjectsSection();
     loadProjects();
   </script>
 </body>
