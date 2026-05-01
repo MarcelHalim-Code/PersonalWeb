@@ -11,16 +11,22 @@
     "image": "Projects/Proj1/project_image.svg",
     "folder": "Proj1"
   },
-  {
-    "name": "Test Project",
-    "shortDescription": "A demo project with a clean card layout and modal details.",
-    "description": "This sample project shows how the portfolio page will display each folder inside Projects. It includes a modal, tags, and image preview.",
-    "tags": [
-      "HTML",
-      "CSS",
-      "UX"
-    ],
-    "image": "Projects/TestProj/project_image.svg",
-    "folder": "TestProj"
-  }
+{
+  "name": "Invoice Processing Bot",
+  "shortDescription": "Automated invoice extraction and SAP posting.",
+  "description": "An unattended UiPath automation that processes PDF invoices using OCR and posts validated entries into SAP automatically.",
+  "tags": [
+    "UiPath",
+    "OCR",
+    "SAP",
+    "Unattended"
+  ],
+  "metrics": {
+    "timeSaved": "120 hrs/month",
+    "accuracy": "98%",
+    "volume": "3000 invoices/month"
+  },
+  "status": "Production",
+  "type": "Enterprise Automation"
+}
 ]
