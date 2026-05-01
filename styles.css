@@ -57,6 +57,7 @@ header p {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
+  width: 100%;
 }
 
 .personal-panel {
@@ -157,11 +158,11 @@ header p {
 }
 
 .stack-card li {
-  background: #f8fafc;
+  background: rgba(250, 204, 21, 0.12);
   border-radius: 14px;
   padding: 12px 14px;
-  color: #334155;
-  font-weight: 600;
+  color: #071a2c;
+  font-weight: 700;
 }
 
 .cta-button {
@@ -171,7 +172,7 @@ header p {
   margin-top: 32px;
   padding: 14px 24px;
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--text);
   color: #071a2c;
   text-decoration: none;
   font-weight: 700;
@@ -189,6 +190,14 @@ header p {
   transform: translateY(0);
 }
 
+.projects-section .grid {
+  grid-template-columns: 1fr !important;
+}
+
+.projects-section .grid > * {
+  width: 100%;
+}
+
 .card {
   background: var(--surface);
   border-radius: 24px;
@@ -197,6 +206,7 @@ header p {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: row;
+  width: 100%;
   min-height: 260px;
 }
 
@@ -206,8 +216,8 @@ header p {
 }
 
 .card-image {
-  flex: 0 0 44%;
-  min-width: 220px;
+  flex: 0 0 40%;
+  min-width: 260px;
   overflow: hidden;
   background: var(--surface-soft);
 }
@@ -232,19 +242,20 @@ header p {
   margin: 0 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
 .card-title {
   margin: 0;
-  font-size: clamp(1.5rem, 2vw, 2.2rem);
+  font-size: clamp(1.7rem, 2.2vw, 2.4rem);
   line-height: 1.1;
+  color: var(--text);
 }
 
 .card-description {
   margin: 0;
-  color: var(--text);
+  color: var(--muted);
   line-height: 1.8;
 }
 
@@ -263,12 +274,12 @@ header p {
 }
 
 .tag {
-  background: rgba(250, 204, 21, 0.15);
-  color: #08151e;
+  background: var(--accent);
+  color: #071a2c;
   padding: 10px 14px;
   border-radius: 999px;
   font-size: 0.92rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .empty-state {
