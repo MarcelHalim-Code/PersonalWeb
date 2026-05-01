@@ -1,8 +1,14 @@
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   font-family: Inter, system-ui, sans-serif;
-  background: #f8fafc;
-  color: #101828;
+  --bg: #061325;
+  --surface: #0d2443;
+  --surface-soft: #102d52;
+  --text: #f8fafc;
+  --muted: #a5b4fc;
+  --accent: #facc15;
+  --accent-soft: #fde047;
+  --border: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -12,7 +18,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(180deg, #061325 0%, #071a2c 100%);
+  color: var(--text);
   scroll-behavior: smooth;
 }
 
@@ -35,19 +42,20 @@ header h1 {
   margin: 0;
   font-size: clamp(2.1rem, 3vw, 3.2rem);
   letter-spacing: -0.04em;
+  color: var(--text);
 }
 
 header p {
   margin: 12px auto 0;
   max-width: 720px;
-  color: #475569;
+  color: var(--muted);
   line-height: 1.75;
   font-size: 1rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -67,7 +75,7 @@ header p {
   margin: 0 0 16px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #475569;
+  color: var(--muted);
   font-size: 0.82rem;
 }
 
@@ -80,14 +88,14 @@ header p {
 .personal-name span {
   display: block;
   font-size: clamp(2rem, 3.2vw, 3.2rem);
-  color: #0f172a;
+  color: var(--accent);
   margin-top: 8px;
 }
 
 .personal-intro {
   margin: 24px 0 0;
   max-width: 610px;
-  color: #475569;
+  color: var(--text);
   font-size: 1.05rem;
   line-height: 1.85;
 }
@@ -100,15 +108,15 @@ header p {
 }
 
 .detail-item {
-  background: white;
+  background: var(--surface-soft);
   border-radius: 18px;
   padding: 18px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .detail-item span {
   display: block;
-  color: #64748b;
+  color: var(--muted);
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -117,7 +125,7 @@ header p {
 
 .detail-item strong {
   display: block;
-  color: #0f172a;
+  color: var(--text);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -128,15 +136,16 @@ header p {
 }
 
 .stack-card {
-  background: white;
+  background: var(--surface-soft);
   border-radius: 28px;
   padding: 28px;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
 }
 
 .stack-card h2 {
   margin: 0 0 18px;
   font-size: 1.4rem;
+  color: var(--text);
 }
 
 .stack-card ul {
@@ -162,11 +171,11 @@ header p {
   margin-top: 32px;
   padding: 14px 24px;
   border-radius: 999px;
-  background: #0f172a;
-  color: white;
+  background: var(--accent);
+  color: #071a2c;
   text-decoration: none;
   font-weight: 700;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .projects-section {
@@ -181,10 +190,10 @@ header p {
 }
 
 .card {
-  background: white;
+  background: var(--surface);
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: row;
@@ -193,13 +202,14 @@ header p {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.25);
 }
 
 .card-image {
   flex: 0 0 44%;
   min-width: 220px;
   overflow: hidden;
+  background: var(--surface-soft);
 }
 
 .card-image img {
@@ -207,7 +217,6 @@ header p {
   height: 100%;
   object-fit: cover;
   display: block;
-  background: #e2e8f0;
 }
 
 .card-content {
@@ -235,7 +244,7 @@ header p {
 
 .card-description {
   margin: 0;
-  color: #475569;
+  color: var(--text);
   line-height: 1.8;
 }
 
@@ -254,8 +263,8 @@ header p {
 }
 
 .tag {
-  background: #f8fafc;
-  color: #0f172a;
+  background: rgba(250, 204, 21, 0.15);
+  color: #08151e;
   padding: 10px 14px;
   border-radius: 999px;
   font-size: 0.92rem;
@@ -265,10 +274,10 @@ header p {
 .empty-state {
   text-align: center;
   padding: 48px 16px;
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed rgba(250, 204, 21, 0.4);
   border-radius: 24px;
-  background: rgba(148, 163, 184, 0.08);
-  color: #475569;
+  background: rgba(15, 23, 42, 0.35);
+  color: var(--text);
 }
 
 
