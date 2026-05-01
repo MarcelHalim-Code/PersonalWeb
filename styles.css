@@ -21,6 +21,35 @@ body {
   background: linear-gradient(180deg, #061325 0%, #071a2c 100%);
   color: var(--text);
   scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(247, 227, 160, 0.16) 0, transparent 24%),
+    radial-gradient(circle at 85% 15%, rgba(255, 244, 199, 0.1) 0, transparent 16%),
+    radial-gradient(circle at 20% 78%, rgba(120, 146, 212, 0.08) 0, transparent 22%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 38%, rgba(255, 255, 255, 0.02) 62%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(247, 227, 160, 0.06);
+  top: 120px;
+  left: -120px;
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 html {
@@ -31,6 +60,8 @@ html {
   padding: 32px 24px;
   max-width: 1180px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 header {
