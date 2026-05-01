@@ -1,1 +1,142 @@
-<p>Home<p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p style="text-transform: uppercase; letter-spacing: 0.32em; color:#475569; font-size:0.82rem; margin-bottom:12px;">Portfolio</p>
+      <h1>My project showcase</h1>
+      <p>These cards are generated from the folders inside <strong>Projects/</strong>. Click any project to open details in a modal.</p>
+    </header>
+
+    <div id="projects-grid" class="grid"></div>
+    <div id="empty-state" class="empty-state" hidden>
+      <strong>No projects were found.</strong>
+      <p>Create folders inside <code>Projects/</code>, add a file named <code>project_image</code>, then run the generator script to build the portfolio cards.</p>
+      <p id="load-error" hidden style="margin-top:16px;color:#b91c1c;">The project list could not be loaded.</p>
+    </div>
+  </div>
+
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <img id="modal-image" src="" alt="Project screenshot" />
+      <div class="modal-body">
+        <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+          <div>
+            <p style="margin:0;color:#64748b; text-transform:uppercase; letter-spacing:0.14em; font-size:0.82rem;">Project details</p>
+            <h2 id="modal-title"></h2>
+          </div>
+          <button id="modal-close" class="close-button" aria-label="Close project modal">Close</button>
+        </div>
+        <p id="modal-description"></p>
+        <div id="modal-tags" class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const grid = document.getElementById('projects-grid');
+    const emptyState = document.getElementById('empty-state');
+    const loadError = document.getElementById('load-error');
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalTags = document.getElementById('modal-tags');
+    const modalClose = document.getElementById('modal-close');
+
+    async function loadProjects() {
+      try {
+        const response = await fetch('projects.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('projects.json not found');
+        }
+
+        const projects = await response.json();
+        renderProjects(projects);
+      } catch (error) {
+        renderProjects([], 'Unable to load projects.json. Try opening this page through a local web server or use Live Server.');
+        console.warn('Unable to load projects.json:', error);
+      }
+    }
+
+    function renderProjects(projects, errorMessage = '') {
+      grid.innerHTML = '';
+      modal.classList.remove('open');
+      loadError.hidden = true;
+      loadError.textContent = '';
+
+      if (!projects.length) {
+        emptyState.hidden = false;
+        if (errorMessage) {
+          loadError.textContent = errorMessage;
+          loadError.hidden = false;
+        }
+        return;
+      }
+
+      emptyState.hidden = true;
+
+      projects.forEach((project) => {
+        const card = document.createElement('button');
+        card.className = 'card';
+        card.type = 'button';
+        card.addEventListener('click', () => openModal(project));
+
+        card.innerHTML = `
+          <img src="${project.image}" alt="${project.name} screenshot" />
+          <div class="card-content">
+            <div>
+              <h3 class="card-title">${project.name}</h3>
+              <p class="card-description">${project.shortDescription}</p>
+            </div>
+            <span class="card-link">View details</span>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(project) {
+      modalImage.src = project.image;
+      modalImage.alt = `${project.name} screenshot`;
+      modalTitle.textContent = project.name;
+      modalDescription.textContent = project.description || project.shortDescription;
+      modalTags.innerHTML = '';
+
+      if (project.tags && project.tags.length) {
+        project.tags.forEach((tag) => {
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = tag;
+          modalTags.appendChild(chip);
+        });
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    loadProjects();
+  </script>
+</body>
+</html>

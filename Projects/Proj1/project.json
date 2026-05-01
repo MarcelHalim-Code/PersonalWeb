@@ -1,0 +1,6 @@
+{
+  "name": "Weather Dashboard",
+  "shortDescription": "A responsive app showing current weather and forecasts.",
+  "description": "A weather dashboard built with HTML, CSS, and JavaScript. It uses API data to show current conditions, hourly forecasts, and styling that adapts to any device.",
+  "tags": ["JavaScript", "API", "Responsive"]
+}
