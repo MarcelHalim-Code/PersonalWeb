@@ -27,6 +27,8 @@
     "volume": "3000 invoices/month"
   },
   "status": "Production",
-  "type": "Enterprise Automation"
+  "type": "Enterprise Automation",
+   "image": "Projects/Proj1/project_image.svg",
+    "folder": "TestProj"
 }
 ]
